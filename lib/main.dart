@@ -6,44 +6,24 @@ import 'db/DatabaseHandler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // List<Map> songs = await DatabaseHandler().retrieveAttributes('SELECT title, comments FROM songs', 'title');
-  runApp(const MyApp());
+  List<Map> songs = await DatabaseHandler().retrieveAttributes('SELECT title, comments FROM songs', 'title');
+  runApp(MyApp(
+    songs: List<Map>.generate(songs.length, (index) => songs[index]),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final List<Map> songs;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Worship Songs',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Worship Songs Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  MyApp({super.key, required this.songs});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyApp> createState() => MyAppPageState(songs);
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyAppPageState extends State<MyApp> {
+  final List<Map> songs;
+  MyAppPageState(this.songs);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Scaffold(
             appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("Worship Songs"),
         bottom: TabBar(
           tabs: <Widget>[
             Tab(
@@ -91,10 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
         username.length,
             (index) => username[index]);
       return ListView.builder(
-        itemCount: searchKeywords.length,
+        itemCount: songs.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(searchKeywords[index]),
+            title: Text(songs[index]["title"]),
             // subtitle: Text(prepareTamilTitle(items[index]['title'].toString(), items[index]['comments'].toString())),
             onTap: () {
               //print('The tamil value is ${items[index]['comments']}');

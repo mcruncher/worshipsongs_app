@@ -38,6 +38,7 @@ dependencies:
   sqflite:
   sqflite_common_ffi:
   foundation:
+  sqflite_common_ffi_web:
 
 dev_dependencies:
   flutter_test:

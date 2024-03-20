@@ -1,18 +1,25 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' show dirname, join, url;
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DatabaseHandler{
   Future<Database> initializedDB() async {
-    print('OS: ${Platform.operatingSystem}');
+    if(kIsWeb)
+      {
+        sqfliteFfiInit();
+        databaseFactory = databaseFactoryFfiWeb;
+      }
     if(Platform.isWindows || Platform.isLinux) {
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
+    } else {
+      print('OS: ${Platform.operatingSystem}');
     }
     String databasesPath = await getDatabasesPath();
     var path = join(databasesPath, "songs.sqlite");
@@ -27,7 +34,7 @@ class DatabaseHandler{
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
-      ByteData data = await rootBundle.load(url.join("assets", "songs.sqlite"));
+      ByteData data = await rootBundle.load(url.join("resources/assets", "songs.sqlite"));
       List<int> bytes =
       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
