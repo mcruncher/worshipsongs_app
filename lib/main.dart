@@ -27,6 +27,9 @@ class MyAppPageState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return MaterialApp(
         home: DefaultTabController(
           length: 4,
@@ -57,7 +60,7 @@ class MyAppPageState extends State<MyApp> {
             ),
       body: TabBarView(
         children: <Widget>[
-          _defaultListView(),
+          _defaultListView(oddItemColor,evenItemColor),
         ],
       ),
     ),
@@ -65,7 +68,7 @@ class MyAppPageState extends State<MyApp> {
     );
   }
 
-  Widget _defaultListView() {
+  Widget _defaultListView(Color oddItemColor, Color evenItemColor) {
     String username = "Worship Songs";
     List<String> searchKeywords = List<String>.generate(
         username.length,
@@ -74,6 +77,7 @@ class MyAppPageState extends State<MyApp> {
         itemCount: songs.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            tileColor: index.isOdd ? oddItemColor : evenItemColor,
             title: Text(songs[index]["title"]),
             // subtitle: Text(prepareTamilTitle(items[index]['title'].toString(), items[index]['comments'].toString())),
             onTap: () {
