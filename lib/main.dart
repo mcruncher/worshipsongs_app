@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:worshipsongs_app/widgets/TabBarWidget.dart';
+import 'package:worshipsongs_app/views/TabBarViews.dart';
+import 'package:worshipsongs_app/widgets/ListViewWidget.dart';
 
 import 'db/DatabaseHandler.dart';
 
@@ -39,34 +40,22 @@ class MyAppPageState extends State<MyApp> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Text("Worship Songs"),
-            bottom: new TabBarWidget().mainTabBar(),
+            bottom: new TabBarViews().mainTabBar(),
           ),
           body: TabBarView(
             children: <Widget>[
-              _defaultListView(oddItemColor, evenItemColor),
+              new ListViewWidget()
+                  .defaultListView(songs, "title", oddItemColor, evenItemColor),
+              new ListViewWidget()
+                  .defaultListView(songs, "title", oddItemColor, evenItemColor),
+              new ListViewWidget()
+                  .defaultListView(songs, "title", oddItemColor, evenItemColor),
+              new ListViewWidget()
+                  .defaultListView(songs, "title", oddItemColor, evenItemColor),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _defaultListView(Color oddItemColor, Color evenItemColor) {
-    String username = "Worship Songs";
-    List<String> searchKeywords =
-        List<String>.generate(username.length, (index) => username[index]);
-    return ListView.builder(
-      itemCount: songs.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          tileColor: index.isOdd ? oddItemColor : evenItemColor,
-          title: Text(songs[index]["title"]),
-          // subtitle: Text(prepareTamilTitle(items[index]['title'].toString(), items[index]['comments'].toString())),
-          onTap: () {
-            //print('The tamil value is ${items[index]['comments']}');
-          },
-        );
-      },
     );
   }
 }

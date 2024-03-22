@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TabBarWidget {
+class TabBarViews {
   TabBar mainTabBar() {
     return new TabBar(
       tabs: <Widget>[
