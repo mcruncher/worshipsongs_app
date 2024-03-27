@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ListViewWidget {
-  Widget defaultListView(List<Map> listeItems, String attribute,
+  Widget defaultListView(List<Map> listItems, String attribute,
       Color oddItemColor, Color evenItemColor) {
     return ListView.builder(
-      itemCount: listeItems.length,
+      itemCount: listItems.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           tileColor: index.isOdd ? oddItemColor : evenItemColor,
-          title: Text(listeItems[index][attribute]),
+          title: index == 0 ? Text("No records available") : Text(listItems[index][attribute]),
           // subtitle: Text(prepareTamilTitle(items[index]['title'].toString(), items[index]['comments'].toString())),
           onTap: () {
-            //print('The tamil value is ${items[index]['comments']}');
+            print('The tamil value is ${listItems[index]['comments']}');
           },
         );
       },
