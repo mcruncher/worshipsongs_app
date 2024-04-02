@@ -15,6 +15,9 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
       songs: [],
+      authors: [],
+      books: [],
+      topics: [],
     ));
 
     // Verify that our counter starts at 0.

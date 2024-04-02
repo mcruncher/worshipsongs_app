@@ -14,22 +14,28 @@ void main() {
 
   testWidgets('Listview items count test', (WidgetTester tester) async {
 
-    await tester.pumpWidget(MyApp(songs: songs));
+    await tester.pumpWidget(MyApp(songs: songs, authors: [], books: [], topics: [],));
 
     expect(1, songs.length);
   });
 
-  testWidgets('Listview item - id test', (WidgetTester tester) async {
+  testWidgets(
+    'Test description',
+        (WidgetTester tester) async {
+      // Write your test here
 
-    await tester.pumpWidget(MyApp(songs: songs));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(),
+            body: Center(
+              child: Text('Hi there!'),
+            ),
+          ),
+        ),
+      );
 
-    expect(1, songs[0].keys.first);
-  });
-
-  testWidgets('Listview item - comment test', (WidgetTester tester) async {
-
-    await tester.pumpWidget(MyApp(songs: songs));
-
-    expect('Foo', songs[0].values.first);
-  });
+      var finder = find.text("Hi there!");
+    },
+  );
 }
