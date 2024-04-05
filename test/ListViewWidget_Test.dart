@@ -1,41 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:worshipsongs_app/db/DatabaseHandler.dart';
-import 'package:worshipsongs_app/main.dart';
+import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/views/TabBarWidgets.dart';
 
 
 void main() {
-  setUpAll(() => null);
-  setUp(() => null);
-  tearDown(() => null);
-  tearDownAll(() => null);
-  
-  List<Map> songs = [{1: new Song(id: 1, title: "Foo")}];
 
-  testWidgets('Listview items count test', (WidgetTester tester) async {
+  List<Map> songs = [{1: new Song(id: 1, title: "Foo", lyrics: '')}, {2: new Song(id: 1, title: "Bar", lyrics: '')}];
 
-    await tester.pumpWidget(MyApp(songs: songs, authors: [], books: [], topics: [],));
+  final testableWidget = TabBarWidgets(songs: songs, authors: [], books: [], topics: []);
 
-    expect(1, songs.length);
+  testWidgets('Find text', (WidgetTester tester) async {
+
+    await tester.pumpWidget(testableWidget);
+
+    final item = tester.widgetList<ListTile>(find.byType(ListTile)).elementAt(1);
+    final expected = item.title as Text;
+    expect(expected.data, "Bar");
   });
-
-  testWidgets(
-    'Test description',
-        (WidgetTester tester) async {
-      // Write your test here
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            appBar: AppBar(),
-            body: Center(
-              child: Text('Hi there!'),
-            ),
-          ),
-        ),
-      );
-
-      var finder = find.text("Hi there!");
-    },
-  );
 }

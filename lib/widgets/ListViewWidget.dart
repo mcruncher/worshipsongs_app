@@ -12,9 +12,9 @@ class ListViewWidget {
           // subtitle: Text(prepareTamilTitle(items[index]['title'].toString(), items[index]['comments'].toString())),
           onTap: () {
             print('The tamil value is ${listItems[index]['comments']}');
-          },
+            },
         );
-      },
+      }
     );
   }
 }
