@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../domain/Author.dart';
+import '../domain/Song.dart';
 import '../widgets/ListViewWidget.dart';
 import 'TabBarViews.dart';
 
 class TabBarWidgets extends StatelessWidget {
-  final List<Map> songs;
-  final List<Map> authors;
+  final List<Song> songs;
+  final List<Author> authors;
   final List<Map> books;
   final List<Map> topics;
 
@@ -29,12 +31,6 @@ class TabBarWidgets extends StatelessWidget {
             children: <Widget>[
               new ListViewWidget()
                   .defaultListView(songs, "title", oddItemColor, evenItemColor),
-              new ListViewWidget()
-                  .defaultListView(authors, "display_name", oddItemColor, evenItemColor),
-              new ListViewWidget()
-                  .defaultListView(books, "name", oddItemColor, evenItemColor),
-              new ListViewWidget()
-                  .defaultListView(topics, "name", oddItemColor, evenItemColor),
             ],
           ),
         ),
