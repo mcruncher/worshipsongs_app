@@ -8,7 +8,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
-import '../domain/Author.dart';
 import '../domain/Song.dart';
 
 class DatabaseHandler{
@@ -50,28 +49,16 @@ class DatabaseHandler{
     return await openDatabase(path, readOnly: true);
   }
 
-  Future<List<Map>> getSongs() async {
-    final Database db = await initializedDB();
-    return db.query("songs");
-  }
-
-  Future<List<Map>> retrieveAttributes(String query, String attribute) async {
-    final Database db = await initializedDB();
-    final List<Map> maps = await db.rawQuery(query);
-    return maps;
-  }
+  // Future<List<Map>> retrieveAttributes(String query, String attribute) async {
+  //   final Database db = await initializedDB();
+  //   final List<Map> maps = await db.rawQuery(query);
+  //   return maps;
+  // }
 
   Future<List<Song>> findAllSongs() async {
     Database database = await initializedDB();
     var response = await database.query("songs");
     List<Song> list = response.map((c) => Song.fromMap(c)).toList();
-    return list;
-  }
-
-  Future<List<Author>> findAllAuthors() async {
-    Database database = await initializedDB();
-    var response = await database.query("authors");
-    List<Author> list = response.map((c) => Author.fromMap(c)).toList();
     return list;
   }
 }

@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../domain/Author.dart';
 import '../domain/Song.dart';
 import '../widgets/ListViewWidget.dart';
 import 'TabBarViews.dart';
 
 class TabBarWidgets extends StatelessWidget {
   final List<Song> songs;
-  final List<Author> authors;
-  final List<Map> books;
-  final List<Map> topics;
 
-  const TabBarWidgets({super.key, required this.songs, required this.authors, required this.books, required this.topics});
+  const TabBarWidgets({super.key, required this.songs});
 
   @override
   Widget build(BuildContext context) {
