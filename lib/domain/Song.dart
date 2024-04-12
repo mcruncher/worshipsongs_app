@@ -1,8 +1,8 @@
 class Song {
   int id;
   String title = "";
-  String? alternateTitle = "";
   String lyrics = "";
+  String? alternateTitle = "";
   String? verseOrder = "";
   String? lastModified;
   String? comment  = "";
