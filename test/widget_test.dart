@@ -14,6 +14,6 @@ void main() {
   
   test('Get song title', ()
   {
-    expect(ListViewWidget().getListTitle(songs, "title", 0).title, "Seekiramaai Vanthiduvaen Endru Sonneerae");
+    expect(ListViewWidget().getListTitle(songs, 0).title, "Seekiramaai Vanthiduvaen Endru Sonneerae");
   });
 }
