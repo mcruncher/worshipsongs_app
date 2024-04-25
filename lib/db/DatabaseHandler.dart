@@ -8,6 +8,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
+import '../domain/Song.dart';
+
 class DatabaseHandler{
   Future<Database> initializedDB() async {
     if(kIsWeb)
@@ -47,45 +49,16 @@ class DatabaseHandler{
     return await openDatabase(path, readOnly: true);
   }
 
-  Future<List<Map>> retrieveAttributes(String query, String attribute) async {
-    final Database db = await initializedDB();
-    final List<Map> maps = await db.rawQuery(query);
-    return maps;
-  }
+  // Future<List<Map>> retrieveAttributes(String query, String attribute) async {
+  //   final Database db = await initializedDB();
+  //   final List<Map> maps = await db.rawQuery(query);
+  //   return maps;
+  // }
 
-   Future<String> lyricsByTitle(String title) async {
-     final Database db = await initializedDB();
-     final List<Map> lyrics = await db.rawQuery('select lyrics from songs where title = "$title"');
-       return lyrics[0]['lyrics'];
-   }
-
-  Future<List<String>> songsByAuthor(String display_name) async {
-    final Database db = await initializedDB();
-    final List<Map> lyrics = await db.rawQuery('SELECT s.title from authors a, songs s, authors_songs auths where a.id = auths.author_id and s.id = auths.song_id and a.display_name = "$display_name"');
-    return List.generate(lyrics.length, (i) {
-      return lyrics[i]['title'];
-    });
-  }
-}
-
-class Song {
-  final int id;
-  final String title;
-
-  const Song({
-    required this.id,
-    required this.title,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-    };
-  }
-
-  @override
-  String toString() {
-    return 'Song{id: $id, name: $title}';
+  Future<List<Song>> findAllSongs() async {
+    Database database = await initializedDB();
+    List response = await database.query("songs");
+    List<Song> list = response.map((c) => Song.fromMap(c)).toList();
+    return list;
   }
 }
