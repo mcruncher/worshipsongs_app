@@ -57,7 +57,7 @@ class DatabaseHandler{
 
   Future<List<Song>> findAllSongs() async {
     Database database = await initializedDB();
-    var response = await database.query("songs");
+    List response = await database.query("songs");
     List<Song> list = response.map((c) => Song.fromMap(c)).toList();
     return list;
   }
