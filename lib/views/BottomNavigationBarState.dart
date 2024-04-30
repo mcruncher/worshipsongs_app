@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/service/AuthorService.dart';
 import 'package:worshipsongs_app/views/BottomNavigationBarWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
@@ -85,7 +86,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(authorNameByLanguage(authors[index].display_name)),
+            title: Text(AuthorService().authorNameByLanguage(authors[index].display_name)),
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
               print(authors[index].display_name);
@@ -93,13 +94,5 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
           );
         }
     );
-  }
-
-  String authorNameByLanguage(String authorName) {
-    if(authorName.contains('{')) {
-        return authorName.split('{')[0];
-    } else{
-      return authorName;
-    }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/views/BottomNavigationBarState.dart';
+import 'package:worshipsongs_app/service/AuthorService.dart';
 
 void main() {
   List<Song> songs = [Song(id: 1, title: "Seekiramaai Vanthiduvaen Endru Sonneerae", lyrics: "test lyrics")];
@@ -29,6 +29,6 @@ void main() {
 
   test('Get author name by language', ()
   {
-    expect(BottomNavigationBarState(songs, authors).authorNameByLanguage(authors[2].display_name), 'Arulanantham ');
+    expect(AuthorService().authorNameByLanguage(authors[2].display_name), 'Arulanantham ');
   });
 }
