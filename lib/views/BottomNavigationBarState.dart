@@ -85,12 +85,21 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(authors[index].display_name),
+            title: Text(authorNameByLanguage(authors[index].display_name)),
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
+              print(authors[index].display_name);
             },
           );
         }
     );
+  }
+
+  String authorNameByLanguage(String authorName) {
+    if(authorName.contains('{')) {
+        return authorName.split('{')[0];
+    } else{
+      return authorName;
+    }
   }
 }
