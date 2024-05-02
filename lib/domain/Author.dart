@@ -1,12 +1,18 @@
+import 'package:worshipsongs_app/service/AuthorService.dart';
+
 class Author
 {
-  String display_name = "";
+  String name = "";
   int songs;
+  String tamilName;
+  String defaultName;
 
-  Author({required this.display_name, required this.songs});
+  Author({required this.name, required this.songs, required this.tamilName, required this.defaultName});
 
   factory Author.fromMap(Map<String, dynamic> json) => Author(
-      display_name: json["display_name"],
+      name: json["display_name"],
       songs: json["songs"],
+      tamilName: AuthorService().parseTamilName(json["display_name"]),
+      defaultName: AuthorService().parseEnglishName(json["display_name"]),
   );
 }

@@ -5,7 +5,7 @@ import 'package:worshipsongs_app/service/AuthorService.dart';
 
 void main() {
   List<Song> songs = [Song(id: 1, title: "Seekiramaai Vanthiduvaen Endru Sonneerae", lyrics: "test lyrics")];
-  List<Author> authors = [Author(display_name: "Foo Author", songs: 450), Author(display_name: "Bar Author", songs: 58), Author(display_name: "Arulanantham {அருளானந்தம்}", songs: 152)];
+  List<Author> authors = [Author(name: "Foo Author", songs: 450, tamilName: "", defaultName: "Foo Author"), Author(name: "Bar Author", songs: 58, tamilName: "", defaultName: "Bar Author"), Author(name: "Arulanantham {அருளானந்தம்}", songs: 152, tamilName: "அருளானந்தம்", defaultName: "Arulanantham ")];
   
   test('Get song title', ()
   {
@@ -19,7 +19,7 @@ void main() {
 
   test('Get author name', ()
   {
-    expect(authors[0].display_name, 'Foo Author');
+    expect(authors[0].name, 'Foo Author');
   });
 
   test('Get song count by author', ()
@@ -27,8 +27,13 @@ void main() {
     expect(authors[1].songs, 58);
   });
 
-  test('Get author name by language', ()
+  test('Get author name by Tamil language', ()
   {
-    expect(AuthorService().authorNameByLanguage(authors[2].display_name), 'Arulanantham ');
+    expect(AuthorService().parseTamilName(authors[2].name), 'அருளானந்தம்');
+  });
+
+  test('Get author name by English language', ()
+  {
+    expect(AuthorService().parseEnglishName(authors[2].name), 'Arulanantham ');
   });
 }
