@@ -21,10 +21,4 @@ class SongParser {
     return verseList;
   }
 
-  String formatVerse(String verse) {
-    return verse.replaceAll(RegExp('\\{\\w\\}'), '<lang1>')
-        .replaceAll(RegExp('\\{/\\w\\}'), '</lang1>');
-  }
-
-
 }
