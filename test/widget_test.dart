@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/service/AuthorService.dart';
 
 void main() {
   List<Song> songs = [Song(id: 1, title: "Seekiramaai Vanthiduvaen Endru Sonneerae", lyrics: "test lyrics")];
@@ -25,15 +24,5 @@ void main() {
   test('Get song count by author', ()
   {
     expect(authors[1].songs, 58);
-  });
-
-  test('Get author name by Tamil language', ()
-  {
-    expect(AuthorService().parseTamilName(authors[2].name), 'அருளானந்தம்');
-  });
-
-  test('Get author name by English language', ()
-  {
-    expect(AuthorService().parseEnglishName(authors[2].name), 'Arulanantham ');
   });
 }

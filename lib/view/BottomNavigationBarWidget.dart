@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
-import 'package:worshipsongs_app/views/BottomNavigationBarState.dart';
 import '../domain/Song.dart';
+import 'BottomNavigationBarState.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
   final List<Song> songs;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/views/BottomNavigationBarWidget.dart';
+import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
+
+import 'SongWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Song> songs;
@@ -73,6 +75,10 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
             title: Text(songs[index].title),
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (ct) => SongWidget(songs[index])));
             },
           );
         }
