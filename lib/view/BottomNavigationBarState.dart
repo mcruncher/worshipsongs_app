@@ -3,14 +3,16 @@ import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
 import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
 
+import '../domain/Topic.dart';
 import 'SongWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Song> songs;
   final List<Author> authors;
+  final List<Topic> topics;
   int _selectedIndex = 0;
 
-  BottomNavigationBarState(this.songs, this.authors);
+  BottomNavigationBarState(this.songs, this.authors, this.topics);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -27,7 +29,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     List<Widget> _widgetOptions = <Widget>[
       _listViewBody(oddItemColor, evenItemColor),
       _listViewAuthor(oddItemColor, evenItemColor),
-      _listViewBody(oddItemColor, evenItemColor),
+      _listViewTopic(oddItemColor, evenItemColor),
     ];
 
     return MaterialApp(
@@ -55,8 +57,8 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
             label: 'Author',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Book',
+            icon: Icon(Icons.category),
+            label: 'Topic',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -95,6 +97,22 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
               print(authors[index].name);
+            },
+          );
+        }
+    );
+  }
+
+  Widget _listViewTopic(Color oddItemColor, Color evenItemColor) {
+    return ListView.builder(
+        itemCount: topics.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            tileColor: index.isOdd ? oddItemColor : evenItemColor,
+            title: Text(topics[index].defaultName),
+            subtitle: Text('${topics[index].songs.toString()} songs'),
+            onTap: () {
+              print(topics[index].name);
             },
           );
         }

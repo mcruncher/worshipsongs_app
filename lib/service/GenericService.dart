@@ -1,4 +1,4 @@
-class AuthorService
+class GenericService
 {
   String parseTamilName(String authorName)
   {
