@@ -1,4 +1,4 @@
-import '../service/GenericService.dart';
+import '../parser/TitleParser.dart';
 
 class Topic
 {
@@ -11,8 +11,8 @@ class Topic
 
   factory Topic.fromMap(Map<String, dynamic> json) => Topic(
     name: json["name"],
-    tamilName: GenericService().parseTamilName(json["name"]),
-    defaultName: GenericService().parseEnglishName((json["name"])),
+    tamilName: TitleParser().parseFirstLangugaeTitle(json["name"]),
+    defaultName: TitleParser().parseSecondLangugaeTitle((json["name"])),
     songs: json["songs"],
   );
 }

@@ -1,4 +1,4 @@
-import 'package:worshipsongs_app/service/GenericService.dart';
+import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 class Author
 {
@@ -12,7 +12,7 @@ class Author
   factory Author.fromMap(Map<String, dynamic> json) => Author(
       name: json["display_name"],
       songs: json["songs"],
-      tamilName: GenericService().parseTamilName(json["display_name"]),
-      defaultName: GenericService().parseEnglishName(json["display_name"]),
+      tamilName: TitleParser().parseFirstLangugaeTitle(json["display_name"]),
+      defaultName: TitleParser().parseSecondLangugaeTitle(json["display_name"]),
   );
 }
