@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
 import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
 
@@ -6,9 +7,10 @@ import 'SongWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Song> songs;
+  final List<Author> authors;
   int _selectedIndex = 0;
 
-  BottomNavigationBarState(this.songs);
+  BottomNavigationBarState(this.songs, this.authors);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -22,6 +24,12 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
     final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
 
+    List<Widget> _widgetOptions = <Widget>[
+      _listViewBody(oddItemColor, evenItemColor),
+      _listViewAuthor(oddItemColor, evenItemColor),
+      _listViewBody(oddItemColor, evenItemColor),
+    ];
+
     return MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -34,7 +42,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
         title: const Text('Worship Songs'),
       ),
       body: Center(
-        child: _listViewBody(oddItemColor, evenItemColor),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -71,6 +79,22 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
                 context,
                 MaterialPageRoute(
                     builder: (ct) => SongWidget(songs[index])));
+            },
+          );
+        }
+    );
+  }
+
+  Widget _listViewAuthor(Color oddItemColor, Color evenItemColor) {
+    return ListView.builder(
+        itemCount: authors.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            tileColor: index.isOdd ? oddItemColor : evenItemColor,
+            title: Text(authors[index].defaultName),
+            subtitle: Text('${authors[index].songs.toString()} songs'),
+            onTap: () {
+              print(authors[index].name);
             },
           );
         }

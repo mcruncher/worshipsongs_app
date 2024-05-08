@@ -7,6 +7,7 @@ import 'package:path/path.dart' show dirname, join, url;
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import 'package:worshipsongs_app/domain/Author.dart';
 
 import '../domain/Song.dart';
 
@@ -28,10 +29,7 @@ class DatabaseHandler{
     var exists = await databaseExists(path);
 
     if (!exists) {
-      // Should happen only the first time you launch your application
       print("Creating new copy from asset");
-
-      // Make sure the parent directory exists
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
@@ -40,7 +38,6 @@ class DatabaseHandler{
       List<int> bytes =
       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
-      // Write and flush the bytes written
       await File(path).writeAsBytes(bytes, flush: true);
 
     } else {
@@ -59,6 +56,13 @@ class DatabaseHandler{
     Database database = await initializedDB();
     List response = await database.query("songs");
     List<Song> list = response.map((c) => Song.fromMap(c)).toList();
+    return list;
+  }
+
+  Future<List<Author>> findAuthors() async {
+    Database database = await initializedDB();
+    List response = await database.rawQuery("select a.display_name, count(auths.song_id) as songs from authors a, authors_songs auths where auths.author_id = a.id group by a.display_name");
+    List<Author> list = response.map((c) => Author.fromMap(c)).toList();
     return list;
   }
 }
