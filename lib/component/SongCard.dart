@@ -8,16 +8,14 @@ class SongCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: Column(
-        children: [
-          ListView.builder(
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    return ListView.builder(
             itemCount: listData.length,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
+                tileColor: index.isOdd ? oddItemColor : evenItemColor,
                 title: StyledText(
                   text: listData[index],
                   tags: {
@@ -25,10 +23,7 @@ class SongCard extends StatelessWidget {
                   },
                 ) ,
               );
-            },
-          ),
-        ],
-      ),
+              },
     );
   }
 }
