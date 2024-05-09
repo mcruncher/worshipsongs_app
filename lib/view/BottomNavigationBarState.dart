@@ -4,7 +4,7 @@ import 'package:worshipsongs_app/domain/Song.dart';
 import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
 
 import '../domain/Topic.dart';
-import 'SongWidget.dart';
+import 'SongTitleView.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Song> songs;
@@ -27,7 +27,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
 
     List<Widget> _widgetOptions = <Widget>[
-      _listViewBody(oddItemColor, evenItemColor),
+      SongTitleView(songs: songs),
       _listViewAuthor(oddItemColor, evenItemColor),
       _listViewTopic(oddItemColor, evenItemColor),
     ];
@@ -66,24 +66,6 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
         onTap: _onItemTapped,
       ),
     ),
-    );
-  }
-
-  Widget _listViewBody(Color oddItemColor, Color evenItemColor) {
-    return ListView.builder(
-        itemCount: songs.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(songs[index].title),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (ct) => SongWidget(songs[index])));
-            },
-          );
-        }
     );
   }
 

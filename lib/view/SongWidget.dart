@@ -11,7 +11,9 @@ class SongWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(song.title),
+        title: Center(
+          child: Text(song.title),
+        )
       ),
       body: SongCard(listData: SongParser().parseSong(song)),
     );
