@@ -24,7 +24,7 @@ class SongTitleView extends StatelessWidget
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  CupertinoPageRoute(
                       builder: (ct) => SongWidget(songs[index])));
             },
           );
