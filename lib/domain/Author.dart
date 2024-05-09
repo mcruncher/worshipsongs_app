@@ -12,7 +12,7 @@ class Author
   factory Author.fromMap(Map<String, dynamic> json) => Author(
       name: json["display_name"],
       songs: json["songs"],
-      tamilName: TitleParser().parseFirstLangugaeTitle(json["display_name"]),
-      defaultName: TitleParser().parseSecondLangugaeTitle(json["display_name"]),
+      tamilName: TitleParser().parseTitleByLanguage(json["display_name"]),
+      defaultName: TitleParser().parseTitleByLanguage(json["display_name"]),
   );
 }

@@ -13,7 +13,7 @@ class SongCard extends StatelessWidget {
             itemBuilder: (context, index) {
               return Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(0.0),
                   child: ListTile(
                     // tileColor: index.isOdd ? oddItemColor : evenItemColor,
                     title: StyledText(

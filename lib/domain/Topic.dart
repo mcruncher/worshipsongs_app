@@ -11,8 +11,8 @@ class Topic
 
   factory Topic.fromMap(Map<String, dynamic> json) => Topic(
     name: json["name"],
-    tamilName: TitleParser().parseFirstLangugaeTitle(json["name"]),
-    defaultName: TitleParser().parseSecondLangugaeTitle((json["name"])),
+    tamilName: TitleParser().parseTitleByLanguage(json["name"]),
+    defaultName: TitleParser().parseTitleByLanguage((json["name"])),
     songs: json["songs"],
   );
 }
