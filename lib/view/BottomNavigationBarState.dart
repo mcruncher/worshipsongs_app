@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
 import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
+import 'package:worshipsongs_app/view/TopicTitleView.dart';
 
 import '../domain/Topic.dart';
+import 'AuthorTitleView.dart';
 import 'SongTitleView.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
@@ -22,14 +24,11 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
 
     List<Widget> _widgetOptions = <Widget>[
       SongTitleView(songs: songs),
-      _listViewAuthor(oddItemColor, evenItemColor),
-      _listViewTopic(oddItemColor, evenItemColor),
+      AuthorTitleView(authors: authors),
+      TopicTitleView(topics: topics),
     ];
 
     return MaterialApp(
@@ -66,38 +65,6 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
         onTap: _onItemTapped,
       ),
     ),
-    );
-  }
-
-  Widget _listViewAuthor(Color oddItemColor, Color evenItemColor) {
-    return ListView.builder(
-        itemCount: authors.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(authors[index].defaultName),
-            subtitle: Text('${authors[index].songs.toString()} songs'),
-            onTap: () {
-              print(authors[index].name);
-            },
-          );
-        }
-    );
-  }
-
-  Widget _listViewTopic(Color oddItemColor, Color evenItemColor) {
-    return ListView.builder(
-        itemCount: topics.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(topics[index].defaultName),
-            subtitle: Text('${topics[index].songs.toString()} songs'),
-            onTap: () {
-              print(topics[index].name);
-            },
-          );
-        }
     );
   }
 }
