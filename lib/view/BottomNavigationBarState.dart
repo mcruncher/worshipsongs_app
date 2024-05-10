@@ -48,16 +48,16 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.text_fields),
-            label: 'Title',
+            icon: Icon(Icons.list_alt_outlined),
+            label: 'Songs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_box),
-            label: 'Author',
+            icon: Icon(Icons.people),
+            label: 'Authors',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Topic',
+            icon: Icon(Icons.list),
+            label: 'Topics',
           ),
         ],
         currentIndex: _selectedIndex,
