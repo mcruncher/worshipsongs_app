@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../domain/Topic.dart';
+import '../domain/Author.dart';
 
-
-class TopicTitleView extends StatelessWidget
+class AuthorTitleWidget extends StatelessWidget
 {
-  final List<Topic> topics;
-  TopicTitleView({required this.topics});
+  final List<Author> authors;
+  AuthorTitleWidget({required this.authors});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +16,14 @@ class TopicTitleView extends StatelessWidget
     final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
     final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return ListView.builder(
-        itemCount: topics.length,
+        itemCount: authors.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(topics[index].defaultName),
-            subtitle: Text('${topics[index].songs.toString()} songs'),
+            title: Text(authors[index].defaultName),
+            subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
-              print(topics[index].name);
+              print(authors[index].name);
             },
           );
         }

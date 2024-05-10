@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/view/SongWidget.dart';
 
-class SongTitleView extends StatelessWidget
+import '../domain/Topic.dart';
+
+
+class TopicTitleWidget extends StatelessWidget
 {
-  final List<Song> songs;
-  SongTitleView({required this.songs});
+  final List<Topic> topics;
+  TopicTitleWidget({required this.topics});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +17,14 @@ class SongTitleView extends StatelessWidget
     final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
     final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return ListView.builder(
-        itemCount: songs.length,
+        itemCount: topics.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(songs[index].title),
+            title: Text(topics[index].defaultName),
+            subtitle: Text('${topics[index].songs.toString()} songs'),
             onTap: () {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (ct) => SongWidget(songs[index])));
+              print(topics[index].name);
             },
           );
         }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
+import 'package:worshipsongs_app/widget/BottomNavigationBarWidget.dart';
 
 import 'db/DatabaseHandler.dart';
 import 'domain/Author.dart';

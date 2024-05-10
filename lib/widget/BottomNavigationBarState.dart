@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/view/BottomNavigationBarWidget.dart';
-import 'package:worshipsongs_app/view/TopicTitleView.dart';
+import 'package:worshipsongs_app/widget/TopicTitleWidget.dart';
 
 import '../domain/Topic.dart';
-import 'AuthorTitleView.dart';
-import 'SongTitleView.dart';
+import 'AuthorTitleWidget.dart';
+import 'BottomNavigationBarWidget.dart';
+import 'SongTitleWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Song> songs;
@@ -26,9 +26,9 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   Widget build(BuildContext context) {
 
     List<Widget> _widgetOptions = <Widget>[
-      SongTitleView(songs: songs),
-      AuthorTitleView(authors: authors),
-      TopicTitleView(topics: topics),
+      SongTitleWidget(songs: songs),
+      AuthorTitleWidget(authors: authors),
+      TopicTitleWidget(topics: topics),
     ];
 
     return MaterialApp(
