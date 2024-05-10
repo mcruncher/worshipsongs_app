@@ -1,18 +1,12 @@
-import '../parser/TitleParser.dart';
-
 class Topic
 {
   String name = "";
-  String tamilName;
-  String defaultName;
   int songs;
 
-  Topic({required this.name, required this.tamilName, required this.defaultName, required this.songs});
+  Topic({required this.name, required this.songs});
 
   factory Topic.fromMap(Map<String, dynamic> json) => Topic(
     name: json["name"],
-    tamilName: TitleParser().parseTitleByLanguage(json["name"]),
-    defaultName: TitleParser().parseTitleByLanguage((json["name"])),
     songs: json["songs"],
   );
 }

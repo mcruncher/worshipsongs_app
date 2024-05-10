@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/Topic.dart';
+import '../parser/TitleParser.dart';
 
 
 class TopicTitleWidget extends StatelessWidget
@@ -21,7 +22,7 @@ class TopicTitleWidget extends StatelessWidget
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? oddItemColor : evenItemColor,
-            title: Text(topics[index].defaultName),
+            title: Text(TitleParser().parseTitleByLanguage(topics[index].name)),
             subtitle: Text('${topics[index].songs.toString()} songs'),
             onTap: () {
               print(topics[index].name);
