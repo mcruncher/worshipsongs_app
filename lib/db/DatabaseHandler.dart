@@ -8,6 +8,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
+import 'package:worshipsongs_app/domain/Topic.dart';
 
 import '../domain/Song.dart';
 
@@ -63,6 +64,13 @@ class DatabaseHandler{
     Database database = await initializedDB();
     List response = await database.rawQuery("select a.display_name, count(auths.song_id) as songs from authors a, authors_songs auths where auths.author_id = a.id group by a.display_name");
     List<Author> list = response.map((c) => Author.fromMap(c)).toList();
+    return list;
+  }
+
+  Future<List<Topic>> findTopics() async {
+    Database database = await initializedDB();
+    List response = await database.rawQuery("select topic.id, topic.name as name, count(topic.id) as songs from songs as song, songs_topics as songtopics, topics as topic where songtopics.song_id=song.id  and topic.id=songtopics.topic_id group by topic.name");
+    List<Topic> list = response.map((c) => Topic.fromMap(c)).toList();
     return list;
   }
 }

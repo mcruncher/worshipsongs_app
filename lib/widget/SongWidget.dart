@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:worshipsongs_app/component/SongCard.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+import '../component/SongCard.dart';
 import '../parser/SongParser.dart';
 
 class SongWidget extends StatelessWidget {
@@ -11,11 +11,11 @@ class SongWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(song.title),
+        title: Center(
+          child: Text(song.title),
+        )
       ),
-      body: SingleChildScrollView(
-        child: SongCard(listData: SongParser().parseSong(song)),
-      ),
+      body: SongCard(listData: SongParser().parseSong(song)),
     );
   }
 }

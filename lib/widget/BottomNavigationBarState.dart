@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:worshipsongs_app/domain/Author.dart';
+import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/widget/TopicTitleWidget.dart';
+
+import '../domain/Topic.dart';
+import 'AuthorTitleWidget.dart';
+import 'BottomNavigationBarWidget.dart';
+import 'SongTitleWidget.dart';
+
+class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
+  final List<Song> songs;
+  final List<Author> authors;
+  final List<Topic> topics;
+  int _selectedIndex = 0;
+
+  BottomNavigationBarState(this.songs, this.authors, this.topics);
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<Widget> _widgetOptions = <Widget>[
+      SongTitleWidget(songs: songs),
+      AuthorTitleWidget(authors: authors),
+      TopicTitleWidget(topics: topics),
+    ];
+
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.purple,
+        brightness: Brightness.light,
+        ),
+      ),
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Worship Songs'),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_outlined),
+            label: 'Songs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Authors',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Topics',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.purple[800],
+        onTap: _onItemTapped,
+      ),
+    ),
+    );
+  }
+}
