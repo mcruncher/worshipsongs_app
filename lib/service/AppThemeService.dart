@@ -26,7 +26,7 @@ class AppThemeService
     return colorScheme.primary.withOpacity(0.15);
   }
 
-  setTheme()
+  getTheme()
   {
       return ThemeData(
         colorScheme: ColorScheme.fromSeed(

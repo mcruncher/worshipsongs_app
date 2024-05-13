@@ -37,7 +37,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ];
 
     return MaterialApp(
-      theme: AppThemeService().setTheme(),
+      theme: AppThemeService().getTheme(),
     home: Scaffold(
       appBar: AppBar(
         title: const Text('Worship Songs'),
