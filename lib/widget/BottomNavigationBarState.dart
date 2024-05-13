@@ -17,7 +17,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Topic> topics;
   final List<SongBook> songBooks;
   int _selectedIndex = 0;
-  MaterialColor appMaterialColor = Colors.amber;
+  MaterialColor appMaterialColor = Colors.purple;
 
   BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks);
 
