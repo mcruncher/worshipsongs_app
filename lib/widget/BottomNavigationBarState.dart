@@ -17,7 +17,6 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Topic> topics;
   final List<SongBook> songBooks;
   int _selectedIndex = 0;
-  MaterialColor appMaterialColor = Colors.purple;
 
   BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks);
 
@@ -38,7 +37,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ];
 
     return MaterialApp(
-      theme: AppThemeService().setTheme(appMaterialColor, Brightness.light),
+      theme: AppThemeService().setTheme(),
     home: Scaffold(
       appBar: AppBar(
         title: const Text('Worship Songs'),
@@ -67,7 +66,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: appMaterialColor[800],
+        selectedItemColor: AppThemeService().getAppMaterialColor(),
         onTap: _onItemTapped,
       ),
     ),
