@@ -47,11 +47,11 @@ class DatabaseHandler{
     return await openDatabase(path, readOnly: true);
   }
 
-  // Future<List<Map>> retrieveAttributes(String query, String attribute) async {
-  //   final Database db = await initializedDB();
-  //   final List<Map> maps = await db.rawQuery(query);
-  //   return maps;
-  // }
+  Future<List> retrieveAttributes(String query) async {
+    final Database db = await initializedDB();
+    final List maps = await db.rawQuery(query);
+    return maps;
+  }
 
   Future<List<Song>> findAllSongs() async {
     Database database = await initializedDB();

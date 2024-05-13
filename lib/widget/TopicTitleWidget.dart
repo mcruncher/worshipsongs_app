@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../domain/Topic.dart';
 import '../parser/TitleParser.dart';
+import '../service/AppThemeService.dart';
 
 
 class TopicTitleWidget extends StatelessWidget
@@ -12,16 +13,11 @@ class TopicTitleWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return ListView.builder(
         itemCount: topics.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
+            tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
             title: Text(TitleParser().parseTitleByLanguage(topics[index].name)),
             subtitle: Text('${topics[index].songs.toString()} songs'),
             onTap: () {
