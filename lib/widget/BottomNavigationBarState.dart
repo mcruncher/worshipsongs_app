@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/service/AppThemeService.dart';
 import 'package:worshipsongs_app/widget/TopicTitleWidget.dart';
 
 import '../domain/SongBook.dart';
@@ -16,6 +17,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   final List<Topic> topics;
   final List<SongBook> songBooks;
   int _selectedIndex = 0;
+  MaterialColor appMaterialColor = Colors.amber;
 
   BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks);
 
@@ -36,12 +38,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ];
 
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.purple,
-        brightness: Brightness.light,
-        ),
-      ),
+      theme: AppThemeService().setTheme(appMaterialColor, Brightness.light),
     home: Scaffold(
       appBar: AppBar(
         title: const Text('Worship Songs'),
@@ -70,7 +67,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.purple[800],
+        selectedItemColor: appMaterialColor[800],
         onTap: _onItemTapped,
       ),
     ),

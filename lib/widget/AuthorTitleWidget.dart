@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 import '../domain/Author.dart';
+import '../service/AppThemeService.dart';
 
 class AuthorTitleWidget extends StatelessWidget
 {
@@ -11,16 +12,11 @@ class AuthorTitleWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return ListView.builder(
         itemCount: authors.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
+            tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
             title: Text(TitleParser().parseTitleByLanguage(authors[index].name)),
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
