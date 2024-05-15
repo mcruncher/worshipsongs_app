@@ -41,7 +41,7 @@ dependencies:
   xml: ^6.5.0
   styled_text: ^8.1.0
   shared_preferences: ^2.2.3
-
+  settings_ui: ^2.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

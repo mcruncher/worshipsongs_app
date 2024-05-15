@@ -28,7 +28,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-
+    AppThemeService appThemeService = new AppThemeService();
     List<Widget> _widgetOptions = <Widget>[
       SongTitleWidget(songs: songs),
       AuthorTitleWidget(authors: authors),
@@ -37,7 +37,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ];
 
     return MaterialApp(
-      theme: AppThemeService().getTheme(),
+      theme: appThemeService.getTheme(),
     home: Scaffold(
       appBar: AppBar(
         title: const Text('Worship Songs'),
@@ -66,7 +66,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppThemeService().getAppMaterialColor(),
+        selectedItemColor: appThemeService.getAppMaterialColor(),
         onTap: _onItemTapped,
       ),
     ),
