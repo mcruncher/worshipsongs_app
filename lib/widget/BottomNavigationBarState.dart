@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/preference/Preference.dart';
 import 'package:worshipsongs_app/service/AppThemeService.dart';
+import 'package:worshipsongs_app/widget/SettingWidget.dart';
 import 'package:worshipsongs_app/widget/TopicTitleWidget.dart';
 
 import '../domain/SongBook.dart';
@@ -12,11 +15,15 @@ import 'SongBookWidget.dart';
 import 'SongTitleWidget.dart';
 
 class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
+  Preference preference = new Preference();
+  AppThemeService appThemeService = new AppThemeService();
   final List<Song> songs;
   final List<Author> authors;
   final List<Topic> topics;
   final List<SongBook> songBooks;
   int _selectedIndex = 0;
+  String? selectedLanguage;
+  bool lightTheme = true;
 
   BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks);
 
@@ -28,7 +35,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AppThemeService appThemeService = new AppThemeService();
+    getDefaultPreferences();
     List<Widget> _widgetOptions = <Widget>[
       SongTitleWidget(songs: songs),
       AuthorTitleWidget(authors: authors),
@@ -37,10 +44,29 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ];
 
     return MaterialApp(
-      theme: appThemeService.getTheme(),
+      theme: appThemeService.setTheme(appThemeService.getAppMaterialColor(), appThemeService.setLightThemeSelection(lightTheme)),
+      // theme: appThemeService.getTheme(),
     home: Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: appThemeService.getAppMaterialColor(),
+        ),
         title: const Text('Worship Songs'),
+        centerTitle: true,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => SettingWidget()),
+                );
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -72,4 +98,11 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
     ),
     );
   }
+
+  getDefaultPreferences() async{
+    selectedLanguage = preference.getLanguage().toString();
+    lightTheme = (await preference.getLightThemeSelection())!;
+    setState(() {});
+  }
+
 }

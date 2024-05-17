@@ -12,11 +12,12 @@ class AuthorTitleWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    AppThemeService appThemeService = new AppThemeService();
     return ListView.builder(
         itemCount: authors.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
+            tileColor: index.isOdd ? appThemeService.getOddItemColor(context) : appThemeService.getEvenItemColor(context),
             title: Text(TitleParser().parseTitleByLanguage(authors[index].name)),
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {

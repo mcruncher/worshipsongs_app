@@ -13,11 +13,12 @@ class SongBookWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    AppThemeService appThemeService = new AppThemeService();
     return ListView.builder(
         itemCount: songBooks.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
+            tileColor: index.isOdd ? appThemeService.getOddItemColor(context) : appThemeService.getEvenItemColor(context),
             title: Text(TitleParser().parseTitleByLanguage(songBooks[index].publisher)),
             subtitle: Text('${songBooks[index].songs.toString()} songs'),
             onTap: () {
