@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
-import 'package:worshipsongs_app/parser/SongParser.dart';
+import 'package:worshipsongs_app/parser/SongLyricsParser.dart';
 
 void main() {
   String lyrics = "<?xml version='1.0' encoding='UTF-8'?>\n <song version=\"1.0\">"
@@ -13,11 +13,11 @@ void main() {
       "<verse label=\"3\" type=\"v\"><![CDATA[{y}3. மாம்சமான யாவர் மேலும்{/y}\n Maamsaamaana yaavar maelum\n {y}ஆவியின் அனலை மூட்டிடுவீர்{/y}\n Aaaviyin analai mootiduveer]]></verse>"
       "<verse label=\"3\" type=\"o\"><![CDATA[{y}வானம் திறந்து வந்திடுவீர்{/y}\n Vaanam thiranthu vanthiduveer\n {y}வல்லமையை ஈந்திடுவீர்{/y}\n Vallamaiyai eenthiduveer]]></verse></lyrics></song>";
   Song song = Song(id: 1, title: "Seekiramaai Vanthiduvaen Endru Sonneerae", lyrics: lyrics);
-  SongParser parser = SongParser();
+  SongLyricsParser parser = SongLyricsParser();
 
   test('Parse song', ()
   {
-    expect(parser.parseSong(song).length, 8);
-    expect(parser.parseSong(song)[0], "<lang1>அக்கினி அபிஷேகம்<\/lang1>\n Akkini abishegam\n <lang1>பொழிந்திடுவீர் தேவா<\/lang1>\n Pozhinthiduveer Thevaa");
+    expect(parser.parse(song).length, 8);
+    expect(parser.parse(song)[0], "<lang1>அக்கினி அபிஷேகம்<\/lang1>\n Akkini abishegam\n <lang1>பொழிந்திடுவீர் தேவா<\/lang1>\n Pozhinthiduveer Thevaa");
   });
 }

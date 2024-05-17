@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+
 import '../component/SongCard.dart';
-import '../parser/SongParser.dart';
+import '../parser/SongLyricsParser.dart';
 
 class SongWidget extends StatelessWidget {
   final Song song;
@@ -15,7 +16,7 @@ class SongWidget extends StatelessWidget {
           child: Text(song.title),
         )
       ),
-      body: SongCard(listData: SongParser().parseSong(song)),
+      body: SongCard(listData: SongLyricsParser().parse(song)),
     );
   }
 }
