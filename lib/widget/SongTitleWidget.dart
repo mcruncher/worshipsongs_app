@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/domain/Song.dart';
+import 'package:worshipsongs_app/service/AppThemeService.dart';
 
 import 'SongWidget.dart';
 
@@ -11,16 +12,11 @@ class SongTitleWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
     return ListView.builder(
         itemCount: songs.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            tileColor: index.isOdd ? oddItemColor : evenItemColor,
+            tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
             title: Text(songs[index].title),
             onTap: () {
               Navigator.push(

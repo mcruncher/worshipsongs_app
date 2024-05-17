@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 
-import '../domain/Topic.dart';
+import '../domain/SongBook.dart';
 import '../parser/TitleParser.dart';
 import '../service/AppThemeService.dart';
 
-
-class TopicTitleWidget extends StatelessWidget
+class SongBookWidget extends StatelessWidget
 {
-  final List<Topic> topics;
-  TopicTitleWidget({required this.topics});
+  final List<SongBook> songBooks;
+  SongBookWidget({required this.songBooks});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: topics.length,
+        itemCount: songBooks.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             tileColor: index.isOdd ? AppThemeService().getOddItemColor(context) : AppThemeService().getEvenItemColor(context),
-            title: Text(TitleParser().parseTitleByLanguage(topics[index].name)),
-            subtitle: Text('${topics[index].songs.toString()} songs'),
+            title: Text(TitleParser().parseTitleByLanguage(songBooks[index].publisher)),
+            subtitle: Text('${songBooks[index].songs.toString()} songs'),
             onTap: () {
-              print(topics[index].name);
+              print(songBooks);
             },
           );
         }
     );
   }
+
 }
