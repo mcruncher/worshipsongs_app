@@ -1,9 +1,10 @@
 import 'package:xml/xml.dart' as xml;
+
 import '../domain/Song.dart';
 import 'VerseParser.dart';
 
-class SongParser {
-  List<String> parseSong(Song song) {
+class SongLyricsParser {
+  List<String> parse(Song song) {
     List<String> verseList = [];
     final document = xml.XmlDocument.parse(song.lyrics);
     final songNode = document.findElements('song');
@@ -11,8 +12,9 @@ class SongParser {
       final lyricNode = songNode.first.findElements('lyrics');
       if (lyricNode.isNotEmpty) {
         final verses = lyricNode.first.findElements('verse');
+        var verseParser = VerseParser();
         for (final verse in verses) {
-          verseList.add(VerseParser().verse(verse.innerText));
+          verseList.add(verseParser.parse(verse.innerText));
         }
       }
     } else {

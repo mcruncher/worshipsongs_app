@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 import '../domain/Author.dart';
-import '../service/AppThemeService.dart';
+import 'AuthorSongTitleWidget.dart';
 
 class AuthorTitleWidget extends StatelessWidget
 {
@@ -20,7 +20,11 @@ class AuthorTitleWidget extends StatelessWidget
             title: Text(TitleParser().parseTitleByLanguage(authors[index].name)),
             subtitle: Text('${authors[index].songs.toString()} songs'),
             onTap: () {
-              print(authors[index].name);
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (ct) => AuthorSongTitleWidget(authors[index]),
+                  ));
             },
           );
         }

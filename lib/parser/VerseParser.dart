@@ -5,7 +5,7 @@ class VerseParser {
   bool showFirstLanguage = true;
 
 
-  String verse(String verse) {
+  String parse(String verse) {
     if (showFirstLanguage && showSecondLanguage) {
       return formatVerse(verse);
     } else if(showSecondLanguage) {

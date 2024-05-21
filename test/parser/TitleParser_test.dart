@@ -3,7 +3,7 @@ import 'package:worshipsongs_app/domain/Author.dart';
 import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 void main() {
-  Author author = new Author(name: "Arulanantham {அருளானந்தம்}", songs: 152);
+  Author author = new Author(name: "Arulanantham {அருளானந்தம்}", songs: 152, id: 0);
 
   test('Get author name by first language', ()
   {

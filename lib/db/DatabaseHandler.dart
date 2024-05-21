@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' show dirname, join, url;
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import 'package:worshipsongs_app/domain/Author.dart';
@@ -60,9 +59,16 @@ class DatabaseHandler{
     return list;
   }
 
+  Future<List<Song>> findSongsByAuthor(int authorId) async {
+    Database database = await initializedDB();
+    List response = await database.rawQuery('SELECT * FROM songs where id IN (SELECT song_id FROM authors_songs where author_id = ?) ORDER BY title', [authorId]);
+    List<Song> list = response.map((c) => Song.fromMap(c)).toList();
+    return list;
+  }
+
   Future<List<Author>> findAuthors() async {
     Database database = await initializedDB();
-    List response = await database.rawQuery("select a.display_name, count(auths.song_id) as songs from authors a, authors_songs auths where auths.author_id = a.id group by a.display_name");
+    List response = await database.rawQuery("select a.id, a.display_name, count(auths.song_id) as songs from authors a, authors_songs auths where auths.author_id = a.id group by a.display_name");
     List<Author> list = response.map((c) => Author.fromMap(c)).toList();
     return list;
   }
