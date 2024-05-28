@@ -1,10 +1,14 @@
+import '../preference/Preference.dart';
+
 class TitleParser
 {
+  Preference preference = new Preference();
   bool showSecondLanguage = true;
   bool showFirstLanguage = false;
 
   String parseTitleByLanguage(String name)
   {
+    getDefaultPreferences();
     if (showSecondLanguage) {
       return parseSecondLangugaeTitle(name);
     } else if (showFirstLanguage) {
@@ -31,5 +35,10 @@ class TitleParser
     } else {
       return name;
     }
+  }
+
+  getDefaultPreferences() async{
+    showFirstLanguage = (await preference.getShowLanguagePreference("showFirstLanguage"))!;
+    showSecondLanguage = (await preference.getShowLanguagePreference("showSecondLanguage"))!;
   }
 }

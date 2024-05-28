@@ -18,6 +18,8 @@ class _SettingWidgetState extends State<SettingWidget> {
   AppThemeService appThemeService = AppThemeService();
   String? selectedLanguage;
   bool lightTheme = true;
+  bool showSecondLanguage = true;
+  bool showFirstLanguage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,43 @@ class _SettingWidgetState extends State<SettingWidget> {
         centerTitle: true,
       ),
       body: SettingsList(
-        sections: [
+        sections: [SettingsSection(
+          title: Text('Lyrics preference'),
+          tiles: <SettingsTile>[
+            SettingsTile.navigation(
+              leading: Icon(Icons.title),
+              title: Text('English'),
+              trailing: Switch(
+                value: showFirstLanguage,
+                activeColor: appThemeService.appMaterialColor,
+                onChanged: (bool value) {
+                  // This is called when the user toggles the switch.
+                  setState(() {
+                    showFirstLanguage = value;
+                    preference.setShowLanguagePreference("showFirstLanguage", showFirstLanguage);
+                    print('First lang - $showFirstLanguage');
+                  });
+                },
+              ),
+            ),
+            SettingsTile.navigation(
+              leading: Icon(Icons.title),
+              title: Text('தமிழ்'),
+              trailing: Switch(
+                value: showSecondLanguage,
+                activeColor: appThemeService.appMaterialColor,
+                onChanged: (bool value) {
+                  // This is called when the user toggles the switch.
+                  setState(() {
+                    showSecondLanguage = value;
+                    preference.setShowLanguagePreference("showSecondLanguage", showSecondLanguage);
+                    print('Second lang - $showSecondLanguage');
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
           SettingsSection(
             title: Text('Light theme selection'),
             tiles: <SettingsTile>[
@@ -58,6 +96,8 @@ class _SettingWidgetState extends State<SettingWidget> {
   getDefaultPreferences() async{
       selectedLanguage = preference.getLanguage().toString();
       lightTheme = (await preference.getLightThemeSelection())!;
+      showFirstLanguage = (await preference.getShowLanguagePreference("showFirstLanguage"))!;
+      showSecondLanguage = (await preference.getShowLanguagePreference("showSecondLanguage"))!;
     // This is where you save the data and then when the user second time opens  he will get the stoared data
     setState(() {});
   }

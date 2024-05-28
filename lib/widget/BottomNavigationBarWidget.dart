@@ -10,9 +10,11 @@ class BottomNavigationBarWidget extends StatefulWidget {
   final List<Author> authors;
   final List<Topic> topics;
   final List<SongBook> songBooks;
+  final bool showFirstLanguage;
+  final bool showSecondLanguage;
 
-  const BottomNavigationBarWidget({super.key, required this.songs, required this.authors, required this.topics, required this.songBooks});
+  const BottomNavigationBarWidget({super.key, required this.songs, required this.authors, required this.topics, required this.songBooks, required this.showFirstLanguage, required this.showSecondLanguage});
 
   @override
-  State<BottomNavigationBarWidget> createState() => BottomNavigationBarState(songs, authors, topics, songBooks);
+  State<BottomNavigationBarWidget> createState() => BottomNavigationBarState(songs, authors, topics, songBooks, showFirstLanguage, showSecondLanguage);
 }

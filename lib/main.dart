@@ -14,7 +14,9 @@ Future<void> main() async {
   List<Author> authors = await DatabaseHandler().findAuthors();
   List<Topic> topics = await DatabaseHandler().findTopics();
   List<SongBook> songBooks = await SongBookService().getSongBooks();
+  bool showFirstLanguage = true;
+  bool showSecondLanguage = true;
   runApp(BottomNavigationBarWidget(
-    songs: songs, authors: authors, topics: topics, songBooks: songBooks
+    songs: songs, authors: authors, topics: topics, songBooks: songBooks, showFirstLanguage: showFirstLanguage, showSecondLanguage: showSecondLanguage,
   ));
 }

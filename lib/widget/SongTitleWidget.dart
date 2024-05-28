@@ -8,7 +8,9 @@ import 'SongWidget.dart';
 class SongTitleWidget extends StatelessWidget
 {
   final List<Song> songs;
-  SongTitleWidget({required this.songs});
+  bool showFirstLanguage;
+  bool showSecondLanguage;
+  SongTitleWidget({required this.songs, required this.showFirstLanguage, required this.showSecondLanguage});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class SongTitleWidget extends StatelessWidget
               Navigator.push(
                   context,
                   CupertinoPageRoute(
-                      builder: (ct) => SongWidget(songs[index])));
+                      builder: (ct) => SongWidget(songs[index], showFirstLanguage, showSecondLanguage)));
             },
           );
         }

@@ -24,8 +24,10 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   int _selectedIndex = 0;
   String? selectedLanguage;
   bool lightTheme = true;
+  bool showSecondLanguage;
+  bool showFirstLanguage;
 
-  BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks);
+  BottomNavigationBarState(this.songs, this.authors, this.topics, this.songBooks, this.showFirstLanguage, this.showSecondLanguage);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,7 +39,7 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   Widget build(BuildContext context) {
     getDefaultPreferences();
     List<Widget> _widgetOptions = <Widget>[
-      SongTitleWidget(songs: songs),
+      SongTitleWidget(songs: songs, showFirstLanguage: showFirstLanguage,showSecondLanguage: showSecondLanguage),
       AuthorTitleWidget(authors: authors),
       TopicTitleWidget(topics: topics),
       SongBookWidget(songBooks: songBooks),
@@ -102,6 +104,8 @@ class BottomNavigationBarState extends State<BottomNavigationBarWidget> {
   getDefaultPreferences() async{
     selectedLanguage = preference.getLanguage().toString();
     lightTheme = (await preference.getLightThemeSelection())!;
+    showFirstLanguage = (await preference.getShowLanguagePreference("showFirstLanguage"))!;
+    showSecondLanguage = (await preference.getShowLanguagePreference("showSecondLanguage"))!;
     setState(() {});
   }
 

@@ -17,7 +17,17 @@ void main() {
 
   test('Parse song', ()
   {
-    expect(parser.parseSong(song).length, 8);
-    expect(parser.parseSong(song)[0], "<lang1>அக்கினி அபிஷேகம்<\/lang1>\n Akkini abishegam\n <lang1>பொழிந்திடுவீர் தேவா<\/lang1>\n Pozhinthiduveer Thevaa");
+    expect(parser.parseSong(song, true, true).length, 8);
+    expect(parser.parseSong(song, true, true)[0], "<lang1>அக்கினி அபிஷேகம்<\/lang1>\n Akkini abishegam\n <lang1>பொழிந்திடுவீர் தேவா<\/lang1>\n Pozhinthiduveer Thevaa");
+  });
+
+  test('Parse song by first language only', ()
+  {
+    expect(parser.parseSong(song, true, false)[0], "\n Akkini abishegam\n \n Pozhinthiduveer Thevaa");
+  });
+
+  test('Parse song by second language only', ()
+  {
+    expect(parser.parseSong(song, false, true)[0], "<lang1>அக்கினி அபிஷேகம்</lang1>\n<lang1>பொழிந்திடுவீர் தேவா</lang1>\n");
   });
 }

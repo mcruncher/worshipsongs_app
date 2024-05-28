@@ -3,7 +3,7 @@ import '../domain/Song.dart';
 import 'VerseParser.dart';
 
 class SongParser {
-  List<String> parseSong(Song song) {
+  List<String> parseSong(Song song, bool showFirstLanguage, bool showSecondLanguage) {
     List<String> verseList = [];
     final document = xml.XmlDocument.parse(song.lyrics);
     final songNode = document.findElements('song');
@@ -12,7 +12,7 @@ class SongParser {
       if (lyricNode.isNotEmpty) {
         final verses = lyricNode.first.findElements('verse');
         for (final verse in verses) {
-          verseList.add(VerseParser().verse(verse.innerText));
+          verseList.add(VerseParser().verse(verse.innerText, showFirstLanguage, showSecondLanguage));
         }
       }
     } else {

@@ -1,11 +1,6 @@
-
-
 class VerseParser {
-  bool showSecondLanguage = true;
-  bool showFirstLanguage = true;
 
-
-  String verse(String verse) {
+  String verse(String verse, bool showFirstLanguage, bool showSecondLanguage) {
     if (showFirstLanguage && showSecondLanguage) {
       return formatVerse(verse);
     } else if(showSecondLanguage) {
@@ -13,7 +8,7 @@ class VerseParser {
     } if(showFirstLanguage) {
       return showOnlyFirstLanguage(verse);
     } else {
-      return "";
+      return showOnlyFirstLanguage(verse);
     }
   }
 
@@ -26,7 +21,13 @@ class VerseParser {
         matchingString = "$matchingString${m[i]!}\n";
       }
     }
-    return formatVerse(matchingString);
+    if(matchingString.isEmpty)
+      {
+        return showOnlyFirstLanguage(verse);
+      } else
+        {
+          return formatVerse(matchingString);
+        }
   }
 
   String showOnlyFirstLanguage(String verse) {
