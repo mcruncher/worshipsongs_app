@@ -3,7 +3,7 @@ import 'package:worshipsongs_app/domain/Topic.dart';
 import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 void main(){
-  Topic topic = new Topic(name: "Discipleship {சீஷத்துவம்}", songs: 54);
+  Topic topic = new Topic(id:1, name: "Discipleship {சீஷத்துவம்}", songs: 54);
 
   test('Get topic name', ()
   {

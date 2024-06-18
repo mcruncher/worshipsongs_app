@@ -66,6 +66,13 @@ class DatabaseHandler{
     return list;
   }
 
+  Future<List<Song>> findSongsByTopic(int topicId) async {
+    Database database = await initializedDB();
+    List response = await database.rawQuery('select * from songs where id in (select song_id from songs_topics where topic_id = ?) order by title', [topicId]);
+    List<Song> list = response.map((c) => Song.fromMap(c)).toList();
+    return list;
+  }
+
   Future<List<Author>> findAuthors() async {
     Database database = await initializedDB();
     List response = await database.rawQuery("select a.id, a.display_name, count(auths.song_id) as songs from authors a, authors_songs auths where auths.author_id = a.id group by a.display_name");

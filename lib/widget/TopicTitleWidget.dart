@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/Topic.dart';
 import '../parser/TitleParser.dart';
 import '../service/AppThemeService.dart';
+import 'TopicSongTitleWidget.dart';
 
 
 class TopicTitleWidget extends StatelessWidget
@@ -20,7 +22,11 @@ class TopicTitleWidget extends StatelessWidget
             title: Text(TitleParser().parseTitleByLanguage(topics[index].name)),
             subtitle: Text('${topics[index].songs.toString()} songs'),
             onTap: () {
-              print(topics[index].name);
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (ct) => TopicSongTitleWidget(topics[index]),
+                  ));
             },
           );
         }
