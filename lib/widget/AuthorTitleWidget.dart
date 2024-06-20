@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:worshipsongs_app/parser/TitleParser.dart';
 
 import '../domain/Author.dart';
+import '../service/AppThemeService.dart';
 import 'AuthorSongTitleWidget.dart';
 
 class AuthorTitleWidget extends StatelessWidget
