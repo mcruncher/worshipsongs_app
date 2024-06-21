@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:worshipsongs_app/widget/SongBookTitleWidget.dart';
 import '../domain/SongBook.dart';
 import '../parser/TitleParser.dart';
 import '../service/AppThemeService.dart';
@@ -19,7 +20,11 @@ class SongBookWidget extends StatelessWidget
             title: Text(TitleParser().parseTitleByLanguage(songBooks[index].publisher)),
             subtitle: Text('${songBooks[index].songs.toString()} songs'),
             onTap: () {
-              print(songBooks);
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (ct) => SongBookTitleWidget(songBooks[index]),
+                  ));
             },
           );
         }
